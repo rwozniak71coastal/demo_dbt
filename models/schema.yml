@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "A summary of customer purchase activity."
+    columns:
+      - name: customer_id
+        description: "The primary key for this table and customer unique identifier."
+        data_tests:
+          - unique
+          - not_null
