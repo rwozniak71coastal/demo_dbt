@@ -1,16 +1,21 @@
--- Develop SQL to build summary table for analysis.
+-- Develop SQL to build a customer summary table for analysis.
+
+-- Add a config block to materialize as a table
+{{
+    config(
+        materialized="table"
+    )
+}}
+
 -- Get our customers
-WITH CUSTOMERS AS (SELECT ID AS CUSTOMER_ID,
-FIRST_NAME,
-LAST_NAME
-FROM RAW.JAFFLE_SHOP.CUSTOMERS),
+WITH CUSTOMERS AS (SELECT * 
+FROM {{ ref("stg_customers")}}
+),
 
 -- Get customer orders
-ORDERS AS (SELECT USER_ID AS CUSTOMER_ID,
-ORDER_DATE,
-STATUS
-FROM RAW.JAFFLE_SHOP.ORDERS 
-WHERE STATUS = 'completed'),
+ORDERS AS (SELECT * 
+FROM {{ ref("stg_orders")}}
+),
 
 -- Summarize orders by cutomer
 CUSTOMER_ORDERS AS (SELECT CUSTOMER_ID,
