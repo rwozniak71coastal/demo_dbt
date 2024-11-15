@@ -1,15 +1,9 @@
--- Add a config block to materialize as a table
-{{
-    config(
-        materialized="table"
-    )
-}}
-
 -- Get customer orders
-WITH ORDERS AS (SELECT USER_ID AS CUSTOMER_ID,
+WITH ORDERS AS (SELECT ID AS ORDER_ID,
+USER_ID AS CUSTOMER_ID,
 ORDER_DATE,
 STATUS
-FROM RAW.JAFFLE_SHOP.ORDERS 
+FROM {{ source('jaffle_shop','orders')}}
 WHERE STATUS = 'completed')
 
 SELECT * 
