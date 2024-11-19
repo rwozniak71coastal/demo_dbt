@@ -1,4 +1,4 @@
-with payments as (
+with payment as (
   
   select
         id as payment_id,
@@ -12,4 +12,5 @@ with payments as (
 
 )
 
-select * from payments
+select * from payment
+
