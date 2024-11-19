@@ -1,0 +1,17 @@
+version: 2
+
+# Add some testing for our models:
+models:
+  - name: fct_orders
+    tests:
+      - unique:
+          column_name: "(order_id || '-' || payment_id)" 
+      - not_null:
+          column_name: "(order_id || '-' || payment_id)" 
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+   
+              
+    

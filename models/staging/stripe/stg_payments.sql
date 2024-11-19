@@ -1,4 +1,4 @@
-with payments as (
+with payment as (
   
   select
         id as payment_id,
@@ -8,8 +8,9 @@ with payments as (
         amount,
         created
 
-    from raw.stripe.payment
+    from {{ source('stripe','payment')}}
 
 )
 
-select * from payments
+select * from payment
+
